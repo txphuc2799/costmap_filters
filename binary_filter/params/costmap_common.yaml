@@ -1,0 +1,4 @@
+binary_fitler:
+  map_topic: /binary_fitler/map
+  binary_state_topic: /binary_state
+  enable: true

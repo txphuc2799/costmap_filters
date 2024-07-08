@@ -1,0 +1,6 @@
+obstacle_fitler:
+  map_topic: /obstacle_fitler/map
+  global_obtascle_srv_name: /move_base_node/global_costmap/obstacles/set_parameters
+  local_obstacle_srv_name: /move_base_node/local_costmap/obstacles/set_parameters
+  enable: true
+  max_height_obstacle: 1.7

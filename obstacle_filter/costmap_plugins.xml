@@ -1,0 +1,9 @@
+<class_libraries>
+  <library path="lib/libobstacle_filter">
+    <class type="costmap_2d::ObstacleFilter"
+           base_class_type="costmap_2d::Layer">
+      <description>Disable obstacle in zones marked on map.</description>
+    </class>
+  </library>
+</class_libraries>
+

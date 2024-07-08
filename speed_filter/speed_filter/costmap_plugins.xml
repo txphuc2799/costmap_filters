@@ -1,0 +1,9 @@
+<class_libraries>
+  <library path="lib/libspeed_filter">
+    <class type="costmap_2d::SpeedFilter"
+           base_class_type="costmap_2d::Layer">
+      <description>Restricts maximum speed of robot in speed-limit zones marked on map.</description>
+    </class>
+  </library>
+</class_libraries>
+

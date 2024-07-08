@@ -1,0 +1,3 @@
+global_costmap:
+    plugins:
+        - {name: obstacle_filter,  type: "costmap_2d::ObstacleFilter" }

@@ -1,0 +1,9 @@
+speed_filter:
+  map_topic: /speed_filter/map
+  laser_field_speed_topic: /laser_field_speed
+  speed_limit_topic: /speed_limit
+  base: 100.0
+  multiplier: -1.0
+  type: 1 # 1: speed limit filter in % of maximum speed
+          # 2: speed limit filter in absolute values (m/s)
+  enable: true
