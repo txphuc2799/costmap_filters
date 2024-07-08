@@ -97,7 +97,7 @@ void ObstacleFilter::process(costmap_2d::Costmap2D& master_grid,
     if (mask_data == DISABLE_OBSTACLE) {
         obstacle_state_ = DISABLE_OBSTACLE;
         if (obstacle_state_ != prev_obstacle_state_){
-            ROS_WARN(
+            ROS_INFO(
             "ObstacleFilter: Disable obstacle detector!");
             setHeightObstacle(0.0);
         }
@@ -105,7 +105,7 @@ void ObstacleFilter::process(costmap_2d::Costmap2D& master_grid,
     else{
         obstacle_state_ = ENABLE_OBSTACLE;
         if (obstacle_state_ != prev_obstacle_state_){
-            ROS_WARN(
+            ROS_INFO(
             "ObstacleFilter: Enable obstacle detector!");
             setHeightObstacle(max_height_obstacle_);
         }
@@ -208,9 +208,9 @@ void ObstacleFilter::setHeightObstacle(double max_obstacle_height)
 
     srv_req.config = conf;
 
-    if (ros::service::call("/move_base_node/local_costmap/obstacles/set_parameters", srv_req, srv_resp)
-        && ros::service::call("/move_base_node/global_costmap/obstacles/set_parameters", srv_req, srv_resp)) {
-        ROS_INFO("Call set /move_base_node/local_costmap/obstacles"
+    if (ros::service::call(local_obstacle_srv_name_, srv_req, srv_resp)
+        && ros::service::call(global_obtascle_srv_name_, srv_req, srv_resp)) {
+        ROS_DEBUG("Call set /move_base_node/local_costmap/obstacles"
                 " & /move_base_node/global_costmap/obstacles parameters succeeded");
     } else {
         ROS_ERROR("Call set /move_base_node/local_costmap/obstacles"
