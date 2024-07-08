@@ -1,1 +1,1 @@
-# disable_obstacle
+# obstacle_filter
