@@ -8,7 +8,6 @@ namespace costmap_2d
 SpeedFilter::SpeedFilter():
     speed_limit_(NO_SPEED_LIMIT),
     speed_limit_prev_(NO_SPEED_LIMIT),
-    laser_field_speed_percentage_(SPEED_MASK_NO_LIMIT),
     percentage_(false),
     filter_mask_(nullptr)
 {
@@ -23,7 +22,6 @@ void SpeedFilter::onInitialize()
     // Initialize parameters
     nh_private_.param("speed_limit_topic", speed_limit_topic_, std::string("speed_limit"));
     nh_private_.param("map_topic", map_topic_, std::string("/map"));
-    nh_private_.param("laser_field_speed_topic", laser_field_topic_, std::string("/laser_field_speed"));
     nh_private_.param("base", base_, 100.0);
     nh_private_.param("multiplier", multiplier_, -1.0);
     nh_private_.param("type", type_, 1);
@@ -37,7 +35,6 @@ void SpeedFilter::onInitialize()
         // we'll subscribe to the latched topic that the map server uses
         ROS_INFO("Requesting the map...");
         map_sub_ = nh_.subscribe(map_topic_, 1, &SpeedFilter::mapCallback, this);
-        laser_field_sub_ = nh_.subscribe(laser_field_topic_, 1, &SpeedFilter::laserFieldCallback, this);
         map_received_ = false;
 
         ros::Rate r(10);
@@ -99,11 +96,6 @@ void SpeedFilter::mapCallback(const nav_msgs::OccupancyGridConstPtr& msg)
     filter_mask_ = msg;
 }
 
-void SpeedFilter::laserFieldCallback(const pallet_truck_msgs::LaserFieldSpeedConstPtr& msg)
-{
-    laser_field_speed_percentage_ = msg->percentage;
-}
-
 void SpeedFilter::process(costmap_2d::Costmap2D& master_grid,
                 int min_i, int min_j, int max_i, int max_j,
                 const geometry_msgs::Pose2D & pose)
@@ -129,21 +121,6 @@ void SpeedFilter::process(costmap_2d::Costmap2D& master_grid,
     // Getting filter_mask data from cell where the robot placed and
     // calculating speed limit value
     int8_t speed_mask_data = getMaskData(filter_mask_, mask_robot_i, mask_robot_j);
-
-    if ((laser_field_speed_percentage_ != SPEED_MASK_NO_LIMIT)
-        && speed_mask_data != SPEED_MASK_NO_LIMIT
-        && speed_mask_data != SPEED_MASK_UNKNOWN){
-        if (speed_mask_data >= laser_field_speed_percentage_){
-            speed_mask_data = speed_mask_data;
-        }
-        else{
-            speed_mask_data = laser_field_speed_percentage_;
-        }
-    }
-    else if ((laser_field_speed_percentage_ != SPEED_MASK_NO_LIMIT)
-             && speed_mask_data != SPEED_MASK_UNKNOWN){
-        speed_mask_data = laser_field_speed_percentage_;
-    }
 
     if (speed_mask_data == SPEED_MASK_NO_LIMIT) {
         // Corresponding filter mask cell is free.
@@ -191,7 +168,7 @@ void SpeedFilter::process(costmap_2d::Costmap2D& master_grid,
         msg.header.frame_id = global_frame_;
         msg.header.stamp = ros::Time::now();
         msg.percentage = percentage_;
-        msg.speed_limit = speed_limit_;
+        msg.speed_limit = speed_limit_/100.0;
         speed_limit_pub_.publish(msg);
 
         speed_limit_prev_ = speed_limit_;

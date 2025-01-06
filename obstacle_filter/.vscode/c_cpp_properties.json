@@ -1,0 +1,50 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/opt/ros/noetic/include/**",
+        "/home/amr/catkin_ws/devel/include/**",
+        "/home/amr/ff_ros1_ws/install/free_fleet/include/**",
+        "/home/amr/ff_ros1_ws/install/cyclonedds/include/**",
+        "/home/amr/catkin_ws/src/amr_v3/amr_v3_autodocking/include/**",
+        "/home/amr/catkin_ws/src/amr_v3/amr_v3_base/include/**",
+        "/home/amr/catkin_ws/src/amr_v3/amr_v3_driver/include/**",
+        "/home/amr/catkin_ws/src/apriltag_ros/apriltag_ros/include/**",
+        "/home/amr/catkin_ws/src/costmap_filters/binary_filter/include/**",
+        "/home/amr/catkin_ws/src/controllers/dwb_controller/costmap_queue/include/**",
+        "/home/amr/catkin_ws/src/image_pipeline/depth_image_proc/include/**",
+        "/home/amr/catkin_ws/src/controllers/dwb_controller/dwb_core/include/**",
+        "/home/amr/catkin_ws/src/controllers/dwb_controller/dwb_critics/include/**",
+        "/home/amr/catkin_ws/src/controllers/dwb_controller/dwb_plugins/include/**",
+        "/home/amr/catkin_ws/src/full_depthimage_to_laserscan/include/**",
+        "/home/amr/catkin_ws/src/image_pipeline/image_proc/include/**",
+        "/home/amr/catkin_ws/src/imu_tools/imu_complementary_filter/include/**",
+        "/home/amr/catkin_ws/src/imu_tools/imu_filter_madgwick/include/**",
+        "/home/amr/catkin_ws/src/laser_filters/include/**",
+        "/home/amr/catkin_ws/src/laser_line_extraction/include/**",
+        "/home/amr/catkin_ws/src/costmap_filters/obstacle_filter/include/**",
+        "/home/amr/catkin_ws/src/pf_lidar_ros_driver/src/pf_driver/include/**",
+        "/home/amr/catkin_ws/src/realsense-ros/realsense2_camera/include/**",
+        "/home/amr/catkin_ws/src/controllers/rotatiton_shim_controller/include/**",
+        "/home/amr/catkin_ws/src/self_localization/include/**",
+        "/home/amr/catkin_ws/src/sick_safetyscanners/include/**",
+        "/home/amr/catkin_ws/src/smoother/include/**",
+        "/home/amr/catkin_ws/src/image_pipeline/stereo_image_proc/include/**",
+        "/home/amr/catkin_ws/src/planners/theta_star_planner/include/**",
+        "/home/amr/catkin_ws/src/usb_cam/include/**",
+        "/home/amr/catkin_ws/src/velocity_smoother/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

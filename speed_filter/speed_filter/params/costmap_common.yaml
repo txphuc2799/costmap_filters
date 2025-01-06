@@ -1,6 +1,5 @@
 speed_filter:
   map_topic: /speed_filter/map
-  laser_field_speed_topic: /laser_field_speed
   speed_limit_topic: /speed_limit
   base: 100.0
   multiplier: -1.0

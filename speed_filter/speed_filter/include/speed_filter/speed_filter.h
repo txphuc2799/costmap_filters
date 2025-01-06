@@ -10,7 +10,6 @@
 #include <geometry_msgs/Pose2D.h>
 #include <geometry_msgs/PointStamped.h>
 #include <speed_filter_msgs/SpeedLimit.h>
-#include <pallet_truck_msgs/LaserFieldSpeed.h>
 
 namespace costmap_2d
 {
@@ -80,7 +79,6 @@ public:
     
 private:
     void mapCallback(const nav_msgs::OccupancyGridConstPtr& msg);
-    void laserFieldCallback(const pallet_truck_msgs::LaserFieldSpeedConstPtr& msg);
 
 private:
     ros::Subscriber map_sub_;
@@ -89,13 +87,12 @@ private:
     std::vector<int8_t> map_data_;
     nav_msgs::OccupancyGrid::ConstPtr filter_mask_;
     geometry_msgs::Pose2D latest_pose_;
-    std::string speed_limit_topic_, map_topic_, global_frame_, laser_field_topic_;
+    std::string speed_limit_topic_, map_topic_, global_frame_;
     bool percentage_;
     bool map_received_;
     double speed_limit_, speed_limit_prev_;
     double base_, multiplier_;
     int type_;
-    int laser_field_speed_percentage_;
 };
 } // namespace costmap_2d
 

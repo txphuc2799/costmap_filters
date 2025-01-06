@@ -6,7 +6,6 @@ find_package(catkin REQUIRED COMPONENTS
   nav_msgs
   costmap_2d
   speed_filter_msgs
-  pallet_truck_msgs
 )
 
 # Declare a catkin package

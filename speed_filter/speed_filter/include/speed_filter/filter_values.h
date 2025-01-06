@@ -15,7 +15,7 @@ namespace costmap_2d
     /** Speed filter constants */
     static constexpr int8_t SPEED_MASK_UNKNOWN = 99;
     static constexpr int8_t SPEED_MASK_NO_LIMIT = 1;
-    static constexpr double NO_SPEED_LIMIT = 0.0;
+    static constexpr double NO_SPEED_LIMIT = 100.0;
 } // namespace costmap_2d
 
 #endif  // FILTER_VALUES_H_
