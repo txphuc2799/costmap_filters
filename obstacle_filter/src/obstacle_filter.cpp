@@ -97,8 +97,6 @@ void ObstacleFilter::process(costmap_2d::Costmap2D& master_grid,
     // calculating speed limit value
     int8_t mask_data = getMaskData(filter_mask_, mask_robot_i, mask_robot_j);
 
-    ROS_INFO("mask_data = %i", mask_data);
-
     if (mask_data == DISABLE_OBSTACLE) {
         obstacle_state_ = DISABLE_OBSTACLE;
         if (obstacle_state_ != prev_obstacle_state_){
