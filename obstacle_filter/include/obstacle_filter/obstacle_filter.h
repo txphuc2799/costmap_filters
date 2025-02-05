@@ -8,6 +8,7 @@
 #include <geometry_msgs/PoseStamped.h>
 #include <geometry_msgs/Pose2D.h>
 #include <geometry_msgs/PointStamped.h>
+#include <std_msgs/Bool.h>
 #include <dynamic_reconfigure/Reconfigure.h>
 #include <dynamic_reconfigure/DoubleParameter.h>
 #include <dynamic_reconfigure/Config.h>
@@ -87,11 +88,12 @@ private:
 
 private:
     ros::Subscriber map_sub_;
+    ros::Publisher obstacle_state_pub_;
     std::vector<int8_t> map_data_;
     nav_msgs::OccupancyGrid::ConstPtr filter_mask_;
     geometry_msgs::Pose2D latest_pose_;
     std::string map_topic_, global_frame_;
-    std::string global_obtascle_srv_name_, local_obstacle_srv_name_;
+    std::string global_obtascle_srv_name_, local_obstacle_srv_name_, obstacle_state_topic_;
     bool map_received_;
     int obstacle_state_, prev_obstacle_state_;
     double max_height_obstacle_;

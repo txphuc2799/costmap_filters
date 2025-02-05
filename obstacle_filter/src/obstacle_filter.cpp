@@ -23,8 +23,11 @@ void ObstacleFilter::onInitialize()
     nh_private_.param("max_height_obstacle", max_height_obstacle_, 1.7);
     nh_private_.param("global_obtascle_srv_name", global_obtascle_srv_name_, std::string("/move_base_node/global_costmap/obstacles/set_parameters"));
     nh_private_.param("local_obstacle_srv_name", local_obstacle_srv_name_, std::string("/move_base_node/local_costmap/obstacles/set_parameters"));
+    nh_private_.param("obstacle_state_topic", obstacle_state_topic_, std::string("/amr/avoid_obstacles"));
 
     global_frame_ = layered_costmap_->getGlobalFrameID();
+
+    obstacle_state_pub_ = nh_private_.advertise<std_msgs::Bool>(obstacle_state_topic_, 1);
 
     // Only resubscribe if topic has changed
     if (map_sub_.getTopic() != ros::names::resolve(map_topic_))
@@ -93,6 +96,8 @@ void ObstacleFilter::process(costmap_2d::Costmap2D& master_grid,
     // Getting filter_mask data from cell where the robot placed and
     // calculating speed limit value
     int8_t mask_data = getMaskData(filter_mask_, mask_robot_i, mask_robot_j);
+
+    ROS_INFO("mask_data = %i", mask_data);
 
     if (mask_data == DISABLE_OBSTACLE) {
         obstacle_state_ = DISABLE_OBSTACLE;
@@ -216,6 +221,14 @@ void ObstacleFilter::setHeightObstacle(double max_obstacle_height)
         ROS_ERROR("Call set /move_base_node/local_costmap/obstacles"
                 " & /move_base_node/global_costmap/obstacles parameters failed");
     }
+
+    std_msgs::Bool msg;
+    if (max_obstacle_height == 0.0) {
+        msg.data = true;    // Disable obstacle detector
+    } else {
+        msg.data = false;   // Enable obstacle detector
+    }
+    obstacle_state_pub_.publish(msg);
 }
 
 } // namespace costmap_2d
