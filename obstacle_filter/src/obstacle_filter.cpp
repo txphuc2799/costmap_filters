@@ -222,9 +222,9 @@ void ObstacleFilter::setHeightObstacle(double max_obstacle_height)
 
     std_msgs::Bool msg;
     if (max_obstacle_height == 0.0) {
-        msg.data = true;    // Disable obstacle detector
+        msg.data = false;    // Disable obstacle detector
     } else {
-        msg.data = false;   // Enable obstacle detector
+        msg.data = true;     // Enable obstacle detector
     }
     obstacle_state_pub_.publish(msg);
 }
